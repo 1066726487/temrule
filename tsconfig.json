@@ -1,0 +1,36 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "isolatedModules": false,
+    "inlineSourceMap": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "pretty": true,
+    "declaration": false,
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["src/types", "typings", "node_modules/@types"],
+    "strict": false,
+    "strictNullChecks": false,
+    "rootDir": "./",
+    "baseUrl": "./",
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "outDir": "dist"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
