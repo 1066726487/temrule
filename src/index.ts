@@ -1,10 +1,17 @@
-import { readFileSync } from 'fs'
-import {MDswitch} from './mustache'
-import { join } from 'path'
+import {Analysis} from './analysis'
+import { defaultRule } from './rule/default'
 
-const testStr = readFileSync(join(__dirname, '../README.MD'),'utf-8')
+const analysis = new Analysis
+analysis.use(defaultRule)
 
-const m = new MDswitch(testStr)
 
-m.render()
+
+// 规则基类
+export * from './base/rule-base'
+
+// 搜索器
+export * from './lib/scanner'
+
+// token
+export * from './lib/token'
 

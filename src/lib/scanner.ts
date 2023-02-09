@@ -10,26 +10,26 @@ export interface IscanUtil {
 export class Scanner{
     // 原字符串类容
     public src: string;
-    // 动指针
-    public beginPos: number = 0;
-    // 定指针
-    public endPos: number = 0;
+    // 快指针
+    public fastPos: number = 0;
+    // 慢指针
+    public slowPos: number = 0;
     // 是否是新的一行， 该行指针扫过的位置没有除空格以外的字符
     public isNewLine: boolean = true
     // 该行前方缩进
     public retract: number = 0
 
     // 扫描区的内容
-    public get content():string{
-        return this.src.substring(this.beginPos,this.endPos)
+    public get content(){
+        return this.src.substring(this.slowPos,this.fastPos)
     }
     // 剩余内容
-    public get tail():string{
-        return this.src.substring(this.endPos)
+    public get tail(){
+        return this.src.substring(this.fastPos)
     }
-    // 动指针所指的字符的 Ascll 码制
-    public get ech():number{
-        return this.src.charCodeAt(this.beginPos)
+    // 开指针所指的字符的 Ascll 码
+    public get fch(){
+        return this.src.charCodeAt(this.fastPos)
     }
 
 
@@ -39,8 +39,8 @@ export class Scanner{
 
     // 试指针跳过指定长度
     public scan(length: number){
-        this.endPos += length
-        this.beginPos  = this.endPos
+        this.fastPos += length
+        this.slowPos  = this.fastPos
     }
  
     /**
@@ -52,14 +52,16 @@ export class Scanner{
         // 扫描 结束指针后移
         while(!this.isFinish()&&!check(this)){
             // 动指针后移
-            this.endPos ++
+            this.fastPos ++
         
             // 检查换行
-            const ch = this.ech
+            const ch = this.fch
             const retractAacll = [ 0x20, /** 空格 */ 0x09, /** 水平制表符 */]
             const enterAacll = [ 0x0A, /** 换行 */ 0x0B, /** 垂直换行符 **/]
+
             if(this.isNewLine===true){
-                this.isNewLine = retractAacll.indexOf(ch) !== -1
+                const before = this.src.charCodeAt(this.fastPos - 1)
+                this.isNewLine = [...retractAacll,...enterAacll].indexOf(before) !== -1
                 // 计算缩进
                 switch(true){
                     case ch === retractAacll[0]:
@@ -75,12 +77,12 @@ export class Scanner{
                 this.retract = 0
             }
         }
-        // 循环结束 定指针回归
-        this.beginPos = this.endPos
+        // 循环结束 慢指针回归
+        this.slowPos = this.fastPos
     }
 
     // 是否扫描完成了所有内容
     public isFinish(){
-        return this.endPos > this.src.length
+        return this.fastPos > this.src.length
     }
 }
