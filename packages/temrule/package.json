@@ -10,7 +10,7 @@
     "build": "tsc & npm run build:cjs",
     "build:cjs": "rollup -c ./rollup.config.mjs",
     "test": "jest",
-    "test:ci": "cross-env NODE_ENV=ci jest --runInBand --logHeapUsage --testPathIgnorePatterns 'test_advance.ts'"
+    "test:ci": "cross-env NODE_ENV=ci jest --runInBand"
   },
   "keywords": [],
   "author": "",
