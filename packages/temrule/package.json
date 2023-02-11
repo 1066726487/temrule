@@ -10,7 +10,7 @@
     "build": "tsc & npm run build:cjs",
     "build:cjs": "rollup -c ./rollup.config.mjs",
     "test": "jest",
-    "test:ci": "jest --runInBand"
+    "test:ci": "jest --runInBand --logHeapUsage"
   },
   "keywords": [],
   "author": "",
