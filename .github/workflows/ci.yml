@@ -23,5 +23,14 @@ jobs:
 
       - run: pnpm install --no-frozen-lockfile
 
-      - name: Run tests
-        run: pnpm run test:temrule
+      
+      - name: '安装 playwright 框架运行环境'
+        uses: maxmilton/action-setup-playwright@v1
+        with:
+          # 可选安装的测试浏览器: chromium, firefox, webkit
+          browsers: chromium
+          headless: true
+
+      - name: '运行 packages/front-circle-test 包的自动化测试'
+        run: npx playwright test test
+        working-directory: packages/temrule
