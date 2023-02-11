@@ -21,7 +21,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      - run: PUPPETEER_SKIP_DOWNLOAD=1 pnpm install
+      - run: pnpm install
 
       - name: Run tests
         run: pnpm run test:temrule
