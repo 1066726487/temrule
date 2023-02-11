@@ -4,8 +4,8 @@ export type Token= {
     content: string|Token[],
     begin: number,
     end: number,
-    prefix?: string,
-    suffix?: string,
+    prefix?: string|null,
+    suffix?: string|null,
 }
 
 export function createToken(opt: Token):Token{

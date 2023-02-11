@@ -1,3 +1,4 @@
+import { Token } from "../lib/token";
 import { Scanner } from "../lib/scanner";
 
 export type MatchResult = {
@@ -8,13 +9,18 @@ export type MatchResult = {
 } | null;
 
 
-export abstract class RuleBase{
+export type renderToken = Omit<Token, 'content'>&{
+    content: string
+    tier: number, //层级 
+}
+
+export abstract class RuleBase {
 
     // 当前规则的 name 
-    public abstract name:string;
+    public abstract name: string;
 
     // 当前匹配规则的类型
-    public abstract type: 'block' | 'line'
+    public abstract type: string;
 
     // 排除的子规则
     public exclude:string[] = []
@@ -23,9 +29,9 @@ export abstract class RuleBase{
     public within:string[] = []
 
     // 当前规则的开始 匹配法则
-    public abstract match(ctx:Scanner):MatchResult;
+    public abstract match(ctx:Scanner):MatchResult
 
     // 当前规则的渲染法则
-    public abstract render(Token):any 
+    public abstract render(Token: renderToken):string
 
 }
