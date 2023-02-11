@@ -42,6 +42,10 @@ module.exports = {
   // 记录内存的使用情况
   logHeapUsage: true,
 
+  globals: {
+    '__GLOBAL_FOO__': true,
+    '__GLOBAL_NUM__': 1,
+  },
 
   // 在单测文件里，可以直接使用describe、test、expect等Jest提供的方法
   // 如果关闭此选项，则需要手动import这些方法，来使用
